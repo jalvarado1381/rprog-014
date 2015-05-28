@@ -2,24 +2,27 @@
 best <- function(state, outcome) {
 
 ## Examples
-## best("TX", "heart failure")
 
+	## best("TX", "heart failure")
+	## > best("SC", "heart attack")
+	##[1] "HILTON HEAD REGIONAL MEDICAL CENTER"
+	## > best("NY", "pneumonia")
+	##[1] "JOHN T MATHER MEMORIAL HOSPITAL  OF PORT JEFFERSON"
 
 ## Read outcome data
-
 	outcome_data <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
+	options( warn = -1 )
 	outcome_data[, 11] <- as.numeric(outcome_data[, 11])
 	outcome_data[, 17] <- as.numeric(outcome_data[, 17])
 	outcome_data[, 23] <- as.numeric(outcome_data[, 23])
+	outcome_data[, 13] <- as.numeric(outcome_data[, 13])
+	outcome_data[, 19] <- as.numeric(outcome_data[, 19])
+	outcome_data[, 25] <- as.numeric(outcome_data[, 25])
+	options( warn = 0 )
 
 ## Check that state and outcome are valid
-	valid_outcomes <- c("heart attack"=11, "heart failure"=17, "pneumonia"=23)
+	valid_outcomes <- c("heart attack"=13, "heart failure"=19, "pneumonia"=25)
 	valid_states <- levels(factor(outcome_data[, 7]))
-	##print(state)
-	##print(valid_states)
-
-	##print(outcome)
-	##print(valid_outcomes)
 
 	isValidState <- function ( s ){
 		for (vs in valid_states){
@@ -49,5 +52,6 @@ best <- function(state, outcome) {
 	valid_rates <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values]
 	min_death<-min(valid_rates)
 	valid_h <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values] == min_death
-	sort(outcome_data[,2][stateh][valid_h])[1]
+	print(outcome_data[,2][stateh][valid_h])
+	return(sort(outcome_data[,2][stateh][valid_h])[1])
 }

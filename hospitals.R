@@ -44,15 +44,10 @@ best <- function(state, outcome) {
 
 ## Return hospital name in that state with lowest 30-day death
 ## rate
-stateh <- outcome_data[,7] == state
-valid_values<-!is.na(outcome_data[,valid_outcomes[outcome]][stateh])
-valid_rates <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values]
-min_death<-min(valid_rates)
-valid_h <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values] == min_death
-print(cat(outcome_data[,1][stateh][valid_h], outcome_data[,2][stateh][valid_h] ), sep = " ")
-print(sort(outcome_data[,2][stateh][valid_h])[1])
-##print(valid_h)
-print (min_death)
-##c(outcome_data[,2][valid_values],outcome_data[,11][valid_values])
-
+	stateh <- outcome_data[,7] == state
+	valid_values<-!is.na(outcome_data[,valid_outcomes[outcome]][stateh])
+	valid_rates <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values]
+	min_death<-min(valid_rates)
+	valid_h <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values] == min_death
+	sort(outcome_data[,2][stateh][valid_h])[1]
 }
