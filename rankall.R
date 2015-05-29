@@ -50,7 +50,7 @@ rankall <- function(outcome, num = "best") {
                           stringsAsFactors = FALSE )
     
     statehdf_ordered<-statehdf[order(statehdf$rate),]
-    ##print(c(quantity_stateh, num1,statehdf_ordered[num1,]$hospital,s))
+    print(c(quantity_stateh, num1,statehdf_ordered[num,]$hospital,s))
     ranked_states[s,1] <- c(statehdf_ordered[num,]$hospital)
     ranked_states[s,2] <- c(s)
     
