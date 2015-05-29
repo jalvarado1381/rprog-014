@@ -37,7 +37,11 @@ rankhospital <- function(state, outcome, num = "best") {
   if (!isValidOutcome(outcome))
     stop(c("invalid outcome" ))
   
+  quantity_stateh <- outcome_data[,7] == state
+  if (sum > quantity_stateh) return(NA)
+  
   ## Return hospital name in that state with the given rank
   ## 30-day death rate
+  
   
 }
