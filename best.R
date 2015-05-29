@@ -21,7 +21,7 @@ best <- function(state, outcome) {
 	options( warn = 0 )
 
 ## Check that state and outcome are valid
-	valid_outcomes <- c("heart attack"=13, "heart failure"=19, "pneumonia"=25)
+	valid_outcomes <- c("heart attack"=11, "heart failure"=17, "pneumonia"=23)
 	valid_states <- levels(factor(outcome_data[, 7]))
 
 	isValidState <- function ( s ){
@@ -48,10 +48,15 @@ best <- function(state, outcome) {
 ## Return hospital name in that state with lowest 30-day death
 ## rate
 	stateh <- outcome_data[,7] == state
-	valid_values<-!is.na(outcome_data[,valid_outcomes[outcome]][stateh])
-	valid_rates <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values]
-	min_death<-min(valid_rates)
-	valid_h <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values] == min_death
-	print(outcome_data[,2][stateh][valid_h])
-	return(sort(outcome_data[,2][stateh][valid_h])[1])
+  voutcome<-valid_outcomes[outcome]
+  bads<-is.na(outcome_data[stateh,voutcome])
+  statehdf <-data.frame(outcome_data[stateh,2][!bads],outcome_data[stateh,voutcome][!bads], stringsAsFactors = FALSE )
+  statehdf[statehdf[,2]==min(statehdf[,2]),1]
+#   outcome_data[stateh,11]
+# 	valid_values<-!is.na(outcome_data[,valid_outcomes[outcome]][stateh])
+# 	valid_rates <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values]
+# 	min_death<-min(valid_rates)
+# 	valid_h <- outcome_data[,valid_outcomes[outcome]][stateh][valid_values] == min_death
+# 	print(outcome_data[,2][stateh][valid_h])
+# 	return(sort(outcome_data[,2][stateh][valid_h])[1])
 }
