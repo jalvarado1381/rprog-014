@@ -3,12 +3,6 @@ best <- function(state, outcome) {
 
 ## Examples
 
-	## best("TX", "heart failure")
-	## > best("SC", "heart attack")
-	##[1] "HILTON HEAD REGIONAL MEDICAL CENTER"
-	## > best("NY", "pneumonia")
-	##[1] "JOHN T MATHER MEMORIAL HOSPITAL  OF PORT JEFFERSON"
-
 ## Read outcome data
 	outcome_data <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
 	options( warn = -1 )
