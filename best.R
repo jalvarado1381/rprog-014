@@ -41,10 +41,12 @@ best <- function(state, outcome) {
 
 ## Return hospital name in that state with lowest 30-day death
 ## rate
-	stateh <- outcome_data[,7] == state
-  voutcome<-valid_outcomes[outcome]
-  bads<-is.na(outcome_data[stateh,voutcome])
-  statehdf <-data.frame(outcome_data[stateh,2][!bads],outcome_data[stateh,voutcome][!bads], stringsAsFactors = FALSE )
+	stateh <- outcome_data[,7] == state ##Hospitales que aplican a la consulta
+  voutcome<-valid_outcomes[outcome] ##Tipo de afeccion 
+  bads<-is.na(outcome_data[stateh,voutcome])## Hospitales sin datos disponibles
+  statehdf <-data.frame(outcome_data[stateh,2][!bads], ##Tabla de hospitales que aplican 
+                        outcome_data[stateh,voutcome][!bads], 
+                        stringsAsFactors = FALSE )
   statehdf[statehdf[,2]==min(statehdf[,2]),1]
 #   outcome_data[stateh,11]
 # 	valid_values<-!is.na(outcome_data[,valid_outcomes[outcome]][stateh])
