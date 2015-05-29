@@ -52,16 +52,14 @@ rankhospital <- function(state, outcome, num = "best") {
   else if (num == "worst") {num = quantity_stateh}
   else if (num > quantity_stateh) { return(NA); }
   
-  
-  
-  ## Return hospital name in that state with the given rank
-  ## 30-day death rate
-
   statehdf <-data.frame(hospital=outcome_data[stateh,2][!bads], ##Tabla de hospitales que aplican 
                         rate=outcome_data[stateh,voutcome][!bads], 
                         stringsAsFactors = FALSE )
   statehdf_ordered<-statehdf[order(statehdf$rate),]
   
-  ##print (c(statehdf_ordered[num,]$hospital, statehdf_ordered[num,]$rate))
+  ## Return hospital name in that state with the given rank
+  ## 30-day death rate
+
   statehdf_ordered[num,]$hospital
+  
 }
